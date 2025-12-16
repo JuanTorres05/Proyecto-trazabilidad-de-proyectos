@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: main(~{::content})}">
+
+<body>
+    <div th:fragment="content">
+        <div class="py-5 text-center">
+            <h2>Registro de Proyecto</h2>
+        </div>
+
+        <div class="row g-5 justify-content-center">
+            <div class="col-md-7 col-lg-8">
+                <form class="needs-validation" th:action="@{/proyectos/guardar}" th:object="${proyecto}" method="post">
+                    <div class="row g-3">
+                        <div class="col-12">
+                            <label for="nombre" class="form-label">Nombre del Proyecto</label>
+                            <input type="text" class="form-control" id="nombre" th:field="*{nombre}" required>
+                        </div>
+
+                        <div class="col-12">
+                            <label for="descripcion" class="form-label">Descripción</label>
+                            <textarea class="form-control" id="descripcion" th:field="*{descripcion}"
+                                rows="3"></textarea>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="gestor" class="form-label">Gestor Asignado</label>
+                            <select class="form-select" id="gestor" th:field="*{gestorAsignado}">
+                                <option value="">Sin asignar...</option>
+                                <option th:each="gestor : ${gestores}" th:value="${gestor.id}"
+                                    th:text="${gestor.nombre + ' ' + gestor.apellidos}">
+                                </option>
+                            </select>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="estado" class="form-label">Estado Inicial</label>
+                            <select class="form-select" id="estado" th:field="*{estadoActual}" required>
+                                <option value="RADICADO">Radicado</option>
+                                <option value="EN_PROCESO">En Proceso</option>
+                                <option value="FINALIZADO">Finalizado</option>
+                                <option value="RECHAZADO">Rechazado</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <hr class="my-4">
+
+                    <button class="w-100 btn btn-primary btn-lg" type="submit">Guardar Proyecto</button>
+                    <a href="/proyectos" class="w-100 btn btn-secondary btn-lg mt-2">Cancelar</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

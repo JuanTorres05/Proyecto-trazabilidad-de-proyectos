@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: main(~{::content})}">
+
+<body>
+    <div th:fragment="content">
+        <div class="p-5 mb-4 bg-light rounded-3">
+            <div class="container-fluid py-5">
+                <h1 class="display-5 fw-bold" th:text="${titulo}">Bienvenido</h1>
+                <p class="col-md-8 fs-4">Sistema moderno para la gestión y trazabilidad de proyectos.</p>
+                <a class="btn btn-primary btn-lg" href="/proyectos" role="button">Ver Proyectos</a>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

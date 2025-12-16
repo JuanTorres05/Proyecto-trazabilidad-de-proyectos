@@ -33,6 +33,9 @@ public class Usuario {
     @Column(length = 20)
     private String telefono;
 
+    @Column(nullable = false)
+    private String password;
+
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 20)
     private RolUsuario rol;

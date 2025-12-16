@@ -9,4 +9,5 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface UsuarioDAO extends JpaRepository<Usuario, Long> {
+    java.util.Optional<Usuario> findByCorreo(String correo);
 }

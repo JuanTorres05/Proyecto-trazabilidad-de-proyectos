@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: main(~{::content})}">
+
+<body>
+    <div th:fragment="content">
+        <div
+            class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+            <h1 class="h2">Listado de Proyectos</h1>
+            <div class="btn-toolbar mb-2 mb-md-0">
+                <a href="/proyectos/nuevo" class="btn btn-sm btn-primary">
+                    Nuevo Proyecto
+                </a>
+            </div>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table table-striped table-sm">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Descripción</th>
+                        <th scope="col">Gestor</th>
+                        <th scope="col">Estado</th>
+                        <th scope="col">Fecha Radicación</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="proyecto : ${proyectos}">
+                        <td th:text="${proyecto.idProyecto}">1</td>
+                        <td th:text="${proyecto.nombre}">Nombre Proyecto</td>
+                        <td th:text="${proyecto.descripcion}">Descripción...</td>
+                        <td
+                            th:text="${proyecto.gestorAsignado != null ? proyecto.gestorAsignado.nombre + ' ' + proyecto.gestorAsignado.apellidos : 'Sin Asignar'}">
+                            Gestor</td>
+                        <td>
+                            <span class="badge rounded-pill"
+                                th:classappend="${proyecto.estadoActual.name() == 'FINALIZADO' ? 'text-bg-success' : 
+                                                   (proyecto.estadoActual.name() == 'EN_PROCESO' ? 'text-bg-warning' : 
+                                                   (proyecto.estadoActual.name() == 'RECHAZADO' ? 'text-bg-danger' : 'text-bg-info'))}"
+                                th:text="${proyecto.estadoActual}">Estado</span>
+                        </td>
+                        <td th:text="${#temporals.format(proyecto.fechaRadicacion, 'dd/MM/yyyy HH:mm')}">Fecha</td>
+                    </tr>
+                    <tr th:if="${#lists.isEmpty(proyectos)}">
+                        <td colspan="6" class="text-center">No hay proyectos registrados.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+
+</html>
